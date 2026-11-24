@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <!-- White card explicitly separates the form from the gray page. -->
         <LinearLayout
@@ -24,12 +25,12 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
             android:paddingTop="28dp"
-            android:paddingBottom="32dp">
+            android:paddingBottom="32dp"
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans"
                 android:gravity="center"
                 android:text="@string/brand"
                 android:textColor="@color/budget_blue"
@@ -64,7 +65,8 @@
                 android:layout_marginTop="28dp"
                 android:text="@string/checking_session"
                 android:textColor="@color/text_dark"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="invisible" />
 
             <LinearLayout
                 android:id="@+id/authForm"
@@ -72,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -167,7 +169,6 @@
                     android:layout_height="52dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/bg_primary_button"
-                    android:fontFamily="sans"
                     android:stateListAnimator="@null"
                     android:text="@string/login"
                     android:textAllCaps="false"
@@ -199,7 +200,6 @@
                     android:layout_height="52dp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_secondary_button"
-                    android:fontFamily="sans"
                     android:stateListAnimator="@null"
                     android:text="@string/register"
                     android:textAllCaps="false"
@@ -239,4 +239,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+        </ScrollView>
