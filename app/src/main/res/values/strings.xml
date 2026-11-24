@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BudgetPath</string>
+    <string name="brand">BudgetPath</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="account">Account</string>
+    <string name="logout">Logout</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_password">Enter password</string>
+    <string name="confirm_password_hint">Confirm password</string>
+    <string name="new_user">New user?</string>
+    <string name="existing_user">Existing user?</string>
+    <string name="checking_session">Checking session…</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="signed_in_as">Signed in as %1$s.</string>
+</resources>

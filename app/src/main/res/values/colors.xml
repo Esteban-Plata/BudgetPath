@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="page_background">#F5F7F9</color>
+    <color name="surface_white">#FFFFFF</color>
+    <color name="budget_blue">#2F73E6</color>
+    <color name="budget_blue_disabled">#A0BEF4</color>
+    <color name="text_dark">#20252B</color>
+    <color name="border_gray">#B8C0C8</color>
+    <color name="input_border">#AEB7C0</color>
+    <color name="hint_gray">#757575</color>
+    <color name="error_red">#B42318</color>
+</resources>
