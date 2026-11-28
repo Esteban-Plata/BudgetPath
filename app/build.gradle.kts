@@ -42,6 +42,9 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
 
+    // Firebase (the old "-ktx" version no longer exists, so this uses the main module)
+    implementation("com.google.firebase:firebase-database:23.0.0")
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.ui)

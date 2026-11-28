@@ -1,18 +1,21 @@
 package com.budgetpath.mobile
 
-import android.app.Activity
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.platform.ComposeView
 import com.example.budgetpath.R
 
-class MainActivity : Activity() {
+// ComponentActivity (instead of Activity) is needed so Compose can run inside this screen
+class MainActivity : ComponentActivity() {
 
     private lateinit var api: AuthApi
     private lateinit var screenTitle: TextView
@@ -30,6 +33,7 @@ class MainActivity : Activity() {
     private lateinit var switchPrompt: TextView
     private lateinit var signedInText: TextView
     private lateinit var logoutButton: Button
+    private lateinit var dashboardView: ComposeView
     private var registerMode = false
     private var busy = false
 
@@ -52,6 +56,22 @@ class MainActivity : Activity() {
         switchPrompt = findViewById(R.id.switchPrompt)
         signedInText = findViewById(R.id.signedInText)
         logoutButton = findViewById(R.id.logoutButton)
+
+        // the dashboard sits on top of the login screen and is only shown when signed in
+        dashboardView = ComposeView(this)
+        dashboardView.setBackgroundColor(0xFFFAFAFA.toInt())
+        dashboardView.visibility = View.GONE
+        dashboardView.setContent {
+            Navigation(onLogout = { logout() })
+        }
+        addContentView(
+            dashboardView,
+            ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        )
+
         submitButton.setOnClickListener { submitCredentials() }
         switchButton.setOnClickListener {
             if (!busy) {
@@ -81,30 +101,11 @@ class MainActivity : Activity() {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == 100) {
-            if (grantResults.isNotEmpty() &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                checkSession()
-            } else {
-                showForm(false)
-                showError("Local network permission is required.")
-            }
-        }
-    }
-
-
     private fun checkSession() {
         authForm.visibility = View.GONE
         authSwitch.visibility = View.GONE
         accountContent.visibility = View.GONE
+        dashboardView.visibility = View.GONE
         checkingText.visibility = View.VISIBLE
 
         Thread {
@@ -130,6 +131,7 @@ class MainActivity : Activity() {
 
         checkingText.visibility = View.GONE
         accountContent.visibility = View.GONE
+        dashboardView.visibility = View.GONE
         authForm.visibility = View.VISIBLE
         authSwitch.visibility = View.VISIBLE
         errorText.visibility = View.GONE
@@ -200,6 +202,7 @@ class MainActivity : Activity() {
         }.start()
     }
 
+    // signed in: hide the login screen and show the dashboard
     private fun showAccount(name: String) {
         screenTitle.text = "Account"
         checkingText.visibility = View.GONE
@@ -208,6 +211,7 @@ class MainActivity : Activity() {
         accountContent.visibility = View.VISIBLE
         errorText.visibility = View.GONE
         signedInText.text = "Signed in as $name."
+        dashboardView.visibility = View.VISIBLE
     }
 
     private fun logout() {
